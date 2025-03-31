@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import os
 import speech_recognition as sr
 
-def configure():
+def configure() -> None:
     load_dotenv()
 
 def listen(timeLimit: int) -> sr.AudioData:
@@ -30,7 +30,7 @@ def recognize(audio: sr.AudioData) -> str:
 
     return recognizedText
     
-def main():
+def main() -> None:
     configure()
     
     wakeWord: str = ""
