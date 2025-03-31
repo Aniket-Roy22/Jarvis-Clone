@@ -1,21 +1,19 @@
-# import pyttsx3
 from dotenv import load_dotenv
 import os
 import speech_recognition as sr
-from speech_recognition import AudioData
 
 def configure():
     load_dotenv()
 
-def listen(timeLimit: int) -> AudioData:
+def listen(timeLimit: int) -> sr.AudioData:
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening...")
-        audio: AudioData = r.listen(source, timeout=2, phrase_time_limit=timeLimit)
+        audio: sr.AudioData = r.listen(source, timeout=2, phrase_time_limit=timeLimit)
     
     return audio
 
-def recognize(audio: AudioData) -> str:
+def recognize(audio: sr.AudioData) -> str:
     
     HOUNDIFY_CLIENT_ID = os.getenv("houndify-client-id")
     HOUNDIFY_CLIENT_KEY = os.getenv("houndify-client-key")
@@ -36,7 +34,7 @@ def main():
     configure()
     
     wakeWord: str = ""
-    audio: AudioData
+    audio: sr.AudioData
     while wakeWord != os.getenv("wake-word"):
         try:
             audio = listen(2)
