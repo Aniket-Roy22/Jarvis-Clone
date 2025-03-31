@@ -7,11 +7,11 @@ from speech_recognition import AudioData
 def configure():
     load_dotenv()
 
-def record() -> AudioData:
+def listen(timeLimit: int) -> AudioData:
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        print("Say something!")
-        audio: AudioData = r.listen(source)
+        print("Listening...")
+        audio: AudioData = r.listen(source, timeout=2, phrase_time_limit=timeLimit)
     
     return audio
 
@@ -19,10 +19,11 @@ def recognize(audio: AudioData) -> str:
     
     HOUNDIFY_CLIENT_ID = os.getenv("houndify-client-id")
     HOUNDIFY_CLIENT_KEY = os.getenv("houndify-client-key")
-    
     r = sr.Recognizer()
-    recognizedText: str = r.recognize_houndify(audio, client_id=HOUNDIFY_CLIENT_ID, client_key=HOUNDIFY_CLIENT_KEY)[0]
+    recognizedText: str
+    
     try:
+        recognizedText = r.recognize_houndify(audio, client_id=HOUNDIFY_CLIENT_ID, client_key=HOUNDIFY_CLIENT_KEY)[0]
         print(recognizedText)
     except sr.UnknownValueError:
         print("I could not understand audio")
@@ -34,8 +35,14 @@ def recognize(audio: AudioData) -> str:
 def main():
     configure()
     
-    
-        
+    wakeWord: str = ""
+    audio: AudioData
+    while wakeWord != os.getenv("wake-word"):
+        try:
+            audio = listen(2)
+            wakeWord = recognize(audio)
+        except sr.WaitTimeoutError:
+            print("Couldn't hear anything...")
     
 if __name__ == "__main__":
     main()
