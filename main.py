@@ -2,6 +2,8 @@ from dotenv import load_dotenv
 import os
 import speech_recognition as sr
 import pyttsx3
+import webbrowser
+import library
 
 def configure() -> None:
     load_dotenv()
@@ -50,6 +52,10 @@ def main() -> None:
         engine = pyttsx3.init()
         engine.say("Hello, how can I help you?")
         engine.runAndWait()
+        action: str = input("Enter action to be done: ").lower()
+        specifics = action.split(" ")
+        for i in specifics[1:]:
+            webbrowser.open(library.allowedActions.get(specifics[0]).get(i))
         
     
 if __name__ == "__main__":

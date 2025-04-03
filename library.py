@@ -1,5 +1,3 @@
-import webbrowser
-
 allowedActions = {
     "open" : {
         "youtube": "https://www.youtube.com",
@@ -16,8 +14,8 @@ allowedActions = {
     },
 }
 
-action: str = input("Enter action to be done: ").lower()
-specifics = action.split(" ")
+# action: str = input("Enter action to be done: ").lower()
+# specifics = action.split(" ")
 
-for i in specifics[1:]:
-    webbrowser.open(allowedActions.get(specifics[0]).get(i))
+# for i in specifics[1:]:
+#     webbrowser.open(allowedActions.get(specifics[0]).get(i))
