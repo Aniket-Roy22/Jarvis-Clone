@@ -5,6 +5,8 @@ import pyttsx3
 import webbrowser
 import library
 
+engine = pyttsx3.init()
+
 def configure() -> None:
     load_dotenv()
 
@@ -45,17 +47,37 @@ def recognizeWakeWord() -> bool:
     else:
         return True
     
+def response() -> None:
+    command: sr.AudioData = listen(5)
+    commandstr: str = recognize(command).lower()
+    specifics: list = commandstr.split(" ")
+    action: str = specifics[0]
+    
+    try:
+        if action not in library.allowedActions:
+                engine.say("Sorry, I can't do that.")
+                engine.runAndWait()
+                return
+        elif len(specifics) == 1:
+                engine.say("Please specify an action.")
+                engine.runAndWait()
+                return
+                        
+        actionObject: str = ''.join(specifics[1:])
+        webbrowser.open(library.allowedActions.get(action).get(actionObject))
+        
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        engine.say("Sorry, I couldn't process your request.")
+        engine.runAndWait()
+    
 def main() -> None:
     configure()
     if recognizeWakeWord():
         print("Wake word recognized!")
-        engine = pyttsx3.init()
         engine.say("Hello, how can I help you?")
         engine.runAndWait()
-        action: str = input("Enter action to be done: ").lower()
-        specifics = action.split(" ")
-        for i in specifics[1:]:
-            webbrowser.open(library.allowedActions.get(specifics[0]).get(i))
+        response()
         
     
 if __name__ == "__main__":

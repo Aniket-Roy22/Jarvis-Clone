@@ -2,20 +2,17 @@ allowedActions = {
     "open" : {
         "youtube": "https://www.youtube.com",
         "github": "https://github.com",
-        "animepahe": "https://animepahe.ru/",
         "udemy": "https://www.udemy.com/",
+        "instagram": "https://www.instagram.com/",
+        "twitter": "https://twitter.com/",
+        "facebook": "https://www.facebook.com/",
+        "linkedin": "https://www.linkedin.com/",
     },
 
     "play" : {
-        "willne": "https://youtu.be/TDP9vQqcLvM?si=mxhY0tj2JxJzsEKg",
-        "mrballen": "https://youtu.be/SdsoQXoG6OQ?si=_z8iLQvzSjRKm_zE",
-        "hasangaming": "https://youtu.be/N2fZYw6wrtE?si=9yiQdpJi78a6sme8",
-        "zyox": "https://youtu.be/F3cqjYJKgQw?si=5WCoROlMWJ7DKwMF",
+        "eastside": "https://youtu.be/56WBK4ZK_cw?si=Ot57JTIlhmy5ipii",
+        "shapeofyou": "https://youtu.be/JGwWNGJdvx8?si=kUthbbL0h_7fh3JT",
+        "thistimeforafrica": "https://youtu.be/pRpeEdMmmQ0?si=1QOe9BMlKBYLsrft",
+        "runitup": "https://youtu.be/MbJ72KO5khs?si=ZuWgnFURRUDTPzjK",
     },
 }
-
-# action: str = input("Enter action to be done: ").lower()
-# specifics = action.split(" ")
-
-# for i in specifics[1:]:
-#     webbrowser.open(allowedActions.get(specifics[0]).get(i))
