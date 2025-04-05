@@ -4,6 +4,7 @@ import speech_recognition as sr
 import pyttsx3
 import webbrowser
 import library
+import gpt_module
 
 engine = pyttsx3.init()
 
@@ -53,23 +54,32 @@ def response() -> None:
     specifics: list = commandstr.split(" ")
     action: str = specifics[0]
     
-    try:
-        if action not in library.allowedActions:
+    if action in library.allowedActions:
+        try:
+            if action not in library.allowedActions:
                 engine.say("Sorry, I can't do that.")
                 engine.runAndWait()
                 return
-        elif len(specifics) == 1:
+            elif len(specifics) == 1:
                 engine.say("Please specify an action.")
                 engine.runAndWait()
-                return
-                        
-        actionObject: str = ''.join(specifics[1:])
-        webbrowser.open(library.allowedActions.get(action).get(actionObject))
+                return           
+            actionObject: str = ''.join(specifics[1:])
+            webbrowser.open(library.allowedActions.get(action).get(actionObject))
+            
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            engine.say("Sorry, I couldn't process your request.")
+            engine.runAndWait()    
+    else:
+        prompt: str = commandstr
+        briefPromt: str = prompt + "\nplease respond briefly."
         
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        engine.say("Sorry, I couldn't process your request.")
+        response: str = gpt_module.aiResponse(briefPromt)
+        print(response)
+        engine.say(response)
         engine.runAndWait()
+        
     
 def main() -> None:
     configure()
