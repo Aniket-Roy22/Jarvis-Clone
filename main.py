@@ -36,18 +36,6 @@ def recognize(audio: sr.AudioData) -> str:
 
     return recognizedText
     
-def recognizeWakeWord() -> bool:
-    wakeWord: str = ""
-    audio: sr.AudioData
-    while wakeWord != os.getenv("wake-word"):
-        try:
-            audio = listen(2)
-            wakeWord = recognize(audio)
-        except sr.WaitTimeoutError:
-            print("Couldn't hear anything...")
-    else:
-        return True
-    
 def response() -> None:
     command: sr.AudioData = listen(5)
     commandstr: str = recognize(command).lower()
@@ -80,15 +68,27 @@ def response() -> None:
         engine.say(response)
         engine.runAndWait()
         
-    
 def main() -> None:
     configure()
-    if recognizeWakeWord():
-        print("Wake word recognized!")
-        engine.say("Hello, how can I help you?")
-        engine.runAndWait()
-        response()
-        
-    
+
+    while True:
+        try:
+            audio: sr.AudioData = listen(2)
+            word = recognize(audio).lower()
+
+            if word == os.getenv("wake-word"):
+                print("Wake word recognized!")
+                engine.say("Hello, how can I help you?")
+                engine.runAndWait()
+                response()
+            elif word == os.getenv("termination-phrase"):
+                print("Stopping...")
+                engine.say("Goodbye!")
+                engine.runAndWait()
+                break
+
+        except sr.WaitTimeoutError:
+            print("Couldn't hear anything...")
+
 if __name__ == "__main__":
     main()
