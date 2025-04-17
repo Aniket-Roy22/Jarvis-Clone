@@ -1,12 +1,10 @@
 from dotenv import load_dotenv
 import os
 import speech_recognition as sr
-import pyttsx3
 import webbrowser
-import library
+import ttsconfig
 import gpt_module
-
-engine = pyttsx3.init()
+import library
 
 def configure() -> None:
     load_dotenv()
@@ -45,28 +43,28 @@ def response() -> None:
     if action in library.allowedActions:
         try:
             if action not in library.allowedActions:
-                engine.say("Sorry, I can't do that.")
-                engine.runAndWait()
+                ttsconfig.ttsconfig.engine.say("Sorry, I can't do that.")
+                ttsconfig.engine.runAndWait()
                 return
             elif len(specifics) == 1:
-                engine.say("Please specify an action.")
-                engine.runAndWait()
+                ttsconfig.engine.say("Please specify an action.")
+                ttsconfig.engine.runAndWait()
                 return           
             actionObject: str = ''.join(specifics[1:])
             webbrowser.open(library.allowedActions.get(action).get(actionObject))
             
         except Exception as e:
             print(f"An error occurred: {e}")
-            engine.say("Sorry, I couldn't process your request.")
-            engine.runAndWait()    
+            ttsconfig.engine.say("Sorry, I couldn't process your request.")
+            ttsconfig.engine.runAndWait()    
     else:
         prompt: str = commandstr
         briefPromt: str = prompt + "\nplease respond briefly."
         
         response: str = gpt_module.aiResponse(briefPromt)
         print(response)
-        engine.say(response)
-        engine.runAndWait()
+        ttsconfig.engine.say(response)
+        ttsconfig.engine.runAndWait()
         
 def main() -> None:
     configure()
@@ -78,13 +76,13 @@ def main() -> None:
 
             if word == os.getenv("wake-word"):
                 print("Wake word recognized!")
-                engine.say("Hello, how can I help you?")
-                engine.runAndWait()
+                ttsconfig.engine.say("Hello, how can I help you?")
+                ttsconfig.engine.runAndWait()
                 response()
             elif word == os.getenv("termination-phrase"):
                 print("Stopping...")
-                engine.say("Goodbye!")
-                engine.runAndWait()
+                ttsconfig.engine.say("Goodbye!")
+                ttsconfig.engine.runAndWait()
                 break
 
         except sr.WaitTimeoutError:
