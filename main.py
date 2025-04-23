@@ -3,7 +3,7 @@ import os
 import speech_recognition as sr
 import webbrowser
 import ttsconfig
-import gpt_module
+import ai_module
 import library
 
 def configure() -> None:
@@ -61,7 +61,7 @@ def response() -> None:
         prompt: str = commandstr
         briefPromt: str = prompt + "\nplease respond briefly."
         
-        response: str = gpt_module.aiResponse(briefPromt)
+        response: str = ai_module.aiResponse(briefPromt)
         print(response)
         ttsconfig.engine.say(response)
         ttsconfig.engine.runAndWait()
