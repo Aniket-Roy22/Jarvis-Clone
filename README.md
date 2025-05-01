@@ -9,6 +9,7 @@ pip install -r requirements.txt
 ```
 3. Once the required modules have been installed, create a file named `.env`.
 4. Declare the following variables in your `.env` file:
+
 | Variable | Value |
 | :------- | :---: |
 | houndify-client-id | Your houndify client id |
