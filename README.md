@@ -1,7 +1,11 @@
 # Jarvis-Clone
+
 This is an AI voice assistant like Jarvis from Iron Man.
+
 ---
+
 ## Get Started
+
 1. Clone this repository.
 2. Type the follwoing command in your terminal to install the required python modules:
 ```git
@@ -15,5 +19,15 @@ pip install -r requirements.txt
 | houndify-client-id | Your houndify client id |
 | houndify-client-key | Your houndify client key |
 | deepseek-client-key | Your deepseek-r1-distill-llama-70b:free api key from OpenRouter |
-| wake-word | Any wake word of your choice eg. Jarvis |
-| termination-phrase | Any phrase of your choice eg. Stop |
+| wake-word | Any wake word of your choice (in lowercase). eg. jarvis |
+| termination-phrase | Any phrase of your choice (in lowercase). eg. stop |
+
+5. Next edit the `library.py` file to make your assistant what you want.
+6. Type the following command in your terminal and enjoy:
+```git
+python main.py
+```
+OR
+```git
+python3 main.py
+```
