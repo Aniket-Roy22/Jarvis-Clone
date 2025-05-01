@@ -2,6 +2,11 @@
 
 This is an AI voice assistant like Jarvis from Iron Man.
 
+Main Features: 
+    + Can open any link provided with a voice command 🌐
+    + Can reply to any question with it's AI module 🤖
+    + Scalable: Can add more functionality if needed 🚀
+
 ---
 
 ## Get Started
@@ -22,7 +27,7 @@ pip install -r requirements.txt
 | wake-word | Any wake word of your choice (in lowercase). eg. jarvis |
 | termination-phrase | Any phrase of your choice (in lowercase). eg. stop |
 
-5. Next edit the `library.py` file to make your assistant what you want.
+5. Next edit the `library.py` file for your assistant to function as per your command.
 6. Type the following command in your terminal and enjoy:
 ```git
 python main.py
