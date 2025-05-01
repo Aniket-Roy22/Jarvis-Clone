@@ -1,11 +1,10 @@
 # Jarvis-Clone
-
 This is an AI voice assistant like Jarvis from Iron Man.
 
-* Main Features: 
-    + Can open any link provided with a voice command 🌐
-    + Can reply to any question with it's AI module 🤖
-    + Scalable: Can add more functionality if needed 🚀
+#### 📗 Main Features: 
++ 🌐 Can open any link provided with a voice command.
++ 🤖 Can reply to any question with it's AI module.
++ 🚀 Scalable: Can add more functionality if needed.
 
 ---
 
